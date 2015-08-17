@@ -37,6 +37,7 @@ int min(int x, int y){
     return x > y? y: x;
 }
 
+/* find the median of sorted arrays*/
 double findMedianSortedArrays(int* nums1, int nums1Size, int* nums2, int nums2Size) {
     double median1, median2;
     /* base case */
@@ -50,8 +51,6 @@ double findMedianSortedArrays(int* nums1, int nums1Size, int* nums2, int nums2Si
         return getMedian(nums2, nums1, nums2Size);
     }else if(nums2Size == 1){
         return getMedian(nums1, nums2, nums1Size);
-    }else if (nums1Size == 2 && nums2Size == 2){
-        return (max(nums1[0], nums2[0])+min(nums1[1],nums2[1]))/2.0;
     }
     
     /* find meidan */
