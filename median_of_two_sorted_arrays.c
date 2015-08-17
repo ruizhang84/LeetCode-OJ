@@ -97,3 +97,4 @@ int main(){
     int num2[2] = {3, 4};
     printf ("The number is : %.3f \n", findMedianSortedArrays(num1, 2, num2, 2));
     return 0;
+}
