@@ -13,10 +13,7 @@ public class Solution {
             for (int i = 0; i< left; i++)                       //left not matched
                 sb.append(')');
             ans.add(sb.toString());
-        }
-        
-        
-        else if (nsteps > 0){
+        }else if (nsteps > 0){
             StringBuilder sb_temp = new StringBuilder(sb);
             
             if (left >0){
@@ -26,11 +23,8 @@ public class Solution {
             
             sb.append('(');
             recur_generateParenthesis(nsteps-1, left+1, ans, sb);
-            
-            
+        
         }
-        
-        
     }
     
     
