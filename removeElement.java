@@ -1,7 +1,7 @@
 public class Solution {
     public int removeElement(int[] nums, int val) {
         int size = nums.length;
-        int back = size, temp;
+        int back = size;
         
         for (int i = 0; i < size; i++){
             if (nums[i] == val){
@@ -11,9 +11,7 @@ public class Solution {
                     break;
                 
                 if (back > 0){
-                    temp = nums[back-1];
-                    nums[back-1] = nums[i];
-                    nums[i] = temp;
+                    nums[i] = nums[back-1];
                     back--;
                 }
             }
