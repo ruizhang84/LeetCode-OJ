@@ -51,7 +51,7 @@ public class Solution {
                     
                     
                 }else{
-                    found.clear();
+                    found = new HashMap<String, Integer>();
                     start = i + words_length;
                     founded = 0;
                     
