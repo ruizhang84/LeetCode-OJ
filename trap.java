@@ -7,8 +7,6 @@ public class Solution {
         int left = 0;
         int right = len-1;
         int total = 0;
-        boolean leftcount = false;
-        boolean rightcount = false;
         int leftbound = height[left];
         int rightbound = height[right];
         
