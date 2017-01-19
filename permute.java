@@ -6,22 +6,21 @@ public class Solution {
             return perm;
         
         List<Integer> temp = new ArrayList<Integer> ();
-        List<Integer> visited = new ArrayList<Integer> ();
-        recur_permute(nums, temp, visited, perm);
+        recur_permute(nums, temp, perm);
         
         return perm;
     }
     
-    public void recur_permute(int [] nums, List<Integer> temp_prev, List<Integer> visited_prev, List<List<Integer>> perm){
+    public void recur_permute(int [] nums, List<Integer> temp, List<List<Integer>> perm){
         for (int i = 0; i< nums.length; i++){
-            List<Integer> temp = new ArrayList<Integer> (temp_prev);
-            List<Integer> visited = new ArrayList<Integer> (visited_prev);
-            if (!visited.contains(nums[i])){
+            if (!temp.contains(nums[i])){
                 temp.add(nums[i]);
-                visited.add(nums[i]);
-                recur_permute(nums, temp, visited, perm);
-                if (temp.size() == nums.length)
-                    perm.add(temp);
+                recur_permute(nums, temp, perm);
+                if (temp.size() == nums.length){
+                    List<Integer> temp_ans = new ArrayList<Integer> (temp);
+                    perm.add(temp_ans);
+                }
+                temp.remove(temp.size()-1);
             }
         }
         
