@@ -17,8 +17,10 @@ class Solution(object):
             temp.append(s[:2])
             recur_IP(ans, temp, s[2:], 0)
             temp.pop()
-            
-        if s[0] != '0' and int (s[:3]) <= 255:
+        else:
+            return ans
+        
+        if int (s[:3]) <= 255:
             temp.append(s[:3])
             recur_IP(ans, temp, s[3:], 0)   
             temp.pop()
