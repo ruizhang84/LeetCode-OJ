@@ -8,36 +8,30 @@ class Solution(object):
         if (len(prerequisites)) == 0:
             return True
             
-        maps = [[] for i in range(numCourses)]
-        iters = set()
+        graphs = [[] for i in range(numCourses)]
+        indegree = [ 0 for i in range(numCourses)]
+        #graphs
         for req in prerequisites:
-            if len(maps[req[1]]) != 0 and req[1] not in iters:
-                iters.add(req[1])
-            maps[ req[0] ].append(req[1])
+            indegree[req[1]] += 1
+            graphs[ req[0] ].append(req[1])
 
-        iters = list(iters)
+        #count
+        count = 0
+        
+        #iterate by indegree
+        iters = []
+        for i in range(numCourses):
+            if indegree[i] == 0:
+                count += 1
+                iters.append(i)
+        
         while iters:
-            visited = []
-            u = iters.pop()
-            if dfs(u, visited, maps):
-                return False
+            u = iters.pop()    
             
-        return True
-        
-def dfs(u, visited, maps):
-    visited.append(u)
-        
-    for v in maps[u]:
-        if v in visited:
-            return True
-        else:
-            if dfs(v, visited, maps):
-                return True
-
-    visited.pop()
-    return False
-
-       
-        
-        
-        
+            for v in graphs[u]:
+                indegree[v] -= 1
+                if indegree[v] == 0:
+                    count += 1
+                    iters.append(v)
+                    
+        return count == numCourses
