@@ -1,3 +1,10 @@
+class Solution(object):
+    def canFinish(self, numCourses, prerequisites):
+        """
+        :type numCourses: int
+        :type prerequisites: List[List[int]]
+        :rtype: bool
+        """
         if (len(prerequisites)) == 0:
             return True
             
@@ -29,3 +36,8 @@ def dfs(u, visited, maps):
 
     visited.pop()
     return False
+
+       
+        
+        
+        
