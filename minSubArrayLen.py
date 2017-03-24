@@ -5,8 +5,7 @@ class Solution(object):
         :type nums: List[int]
         :rtype: int
         """
-        left = right = 0
-        total = 0
+        left = right = total == 0
         ans = len(nums)+1
         while right < len(nums):
             while total < s and right < len(nums):
@@ -20,7 +19,5 @@ class Solution(object):
         if ans == len(nums)+1 :
             return 0
         return ans
-        
-        
         
         
