@@ -6,21 +6,28 @@ class Solution(object):
         :type t: int
         :rtype: bool
         """
-        if k == 0:
+        if k < 1 or t < 0:
             return False
-        
+            
         if t == 0:
             maps  = {}
             for i in range(len(nums)):
                 if nums[i] in maps and i-maps[nums[i]] <= k:
                     return True
                 maps[nums[i]] = i
+            
             return False
             
-        for j in range(1, k+1):
-            for i in range(len(nums)-j):
-                if abs(nums[i]-nums[i+j]) <= t:
+        maps = {}
+        for i in range(len(nums)):
+            if i-k > 0:
+                del maps[ nums[i-k-1]/t ]
+            temp = nums[i]/t
+            for j in (temp, temp-1, temp+1):
+                if j in maps and abs(maps[j] - nums[i]) <= t:
                     return True
+            maps[temp] = nums[i]
+            
         return False
         
         
