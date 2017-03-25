@@ -18,15 +18,14 @@ class Solution(object):
             
             return False
             
-        maps = {}
+        maps  = {}
         for i in range(len(nums)):
-            if i-k > 0:
-                del maps[ nums[i-k-1]/t ]
-            temp = nums[i]/t
-            for j in (temp, temp-1, temp+1):
-                if j in maps and abs(maps[j] - nums[i]) <= t:
+            keys = nums[i]/(t+1)
+            for ky in (keys, keys+1, keys-1):
+                if ky in maps and i-maps[ky][0] <= k and abs(nums[i] - maps[ky][1]) <= t:
                     return True
-            maps[temp] = nums[i]
+            maps[keys] = (i, nums[i])
+            
             
         return False
         
