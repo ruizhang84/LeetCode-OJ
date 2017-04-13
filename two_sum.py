@@ -12,38 +12,29 @@
 #Input: numbers={2, 7, 11, 15}, target=9
 #Output: index1=1, index2=2
 
-class Solution:
-    # @param {integer[]} nums
-    # @param {integer} target
-    # @return {integer[]}
+class Solution(object):
     def twoSum(self, nums, target):
-        new_nums = sorted(nums)
+        """
+        :type nums: List[int]
+        :type target: int
+        :rtype: List[int]
+        """
+
+        count = {}
         for i in range(len(nums)):
-            if new_nums[-i-1] <= target + abs(new_nums[0]):
-                index = len(nums)-i-1
-                break
+            if nums[i] not in count:
+                count[nums[i]] = [i]
+            else:
+                count[nums[i]].append(i) 
         
-        first, last = self.match_target(new_nums[0:index+1], 0, index, target)
-        
-        index = []
-        n = 0
         for i in range(len(nums)):
-            if nums[i] == new_nums[first] or nums[i] == new_nums[last]:
-                index += [i+1]
-                n += 1
-                if n  == 2:
-                    break
-        return index
-        
-    def match_target(self, list, first, last, target):
-        if list[first] + list[last] == target:
-            return (first, last)
-        
-        if list[first] + list[last] < target:
-            fist, last = self.match_target(list, first+1, last, target)
-        elif list[first] + list[last] > target:
-            fist, last = self.match_target(list, first, last-1, target)
-        return fist, last
+            if target-nums[i] in count:
+                if count[target-nums[i]][0] != i:
+                    return [i, count[target-nums[i]][0] ]
+                elif len(count[target-nums[i]]) > 1:
+                    return [i, count[target-nums[i]][1] ]
+        return []    
+           
 
 if __name__=="__main__":
     test=Solution()
