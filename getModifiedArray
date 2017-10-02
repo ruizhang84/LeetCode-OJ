@@ -1,0 +1,63 @@
+class Solution(object):
+    def getModifiedArray(self, length, updates):
+        """
+        :type length: int
+        :type updates: List[List[int]]
+        :rtype: List[int]
+        """
+        root = build_tree(length)
+        for up in updates:
+            left, right, incr = up
+            update_val(root, incr, left, right, length)
+        return aggregate(root, 0)
+        
+        
+class BinTree:
+    def __init__(self):
+        self.left = None
+        self.right = None
+        self.val = 0
+        
+def build_tree(length):
+    if length == 0:
+        return None
+    node = BinTree()
+    if length == 1:
+        return node
+    node.left = build_tree(length/2)
+    node.right = build_tree(length-length/2)
+    return node
+
+def update_val(tree, val, leftIndx, rightIndx, length):
+    if rightIndx < leftIndx or leftIndx < 0:
+        return
+    
+    if leftIndx == 0 and rightIndx == length-1:
+        tree.val += val
+        return
+    
+    mid = length/2
+    
+    if leftIndx < mid:
+        if mid-1 < rightIndx:
+            update_val(tree.left, val, leftIndx, mid-1, mid)
+        else:
+            update_val(tree.left, val, leftIndx, rightIndx, mid)
+    if rightIndx >= mid:
+        if mid > leftIndx:
+            update_val(tree.right, val, 0, rightIndx-mid, length-mid)
+        else:
+            update_val(tree.right, val, leftIndx-mid, rightIndx-mid, length-mid)
+    
+def aggregate(tree, updates):
+    if tree.left is None and tree.right is None:
+        return [tree.val+updates]
+    
+    temp = []
+    if tree.left is not None:
+        temp += aggregate(tree.left, updates+tree.val)
+    if tree.right is not None:
+        temp += aggregate(tree.right, updates+tree.val)
+    return temp
+    
+    
